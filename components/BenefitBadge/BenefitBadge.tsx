@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import qualityPic from '../public/images/qualitat.png';
+import qualityPic from '../../public/images/qualitat.png';
 
 export default function BenefitBadge() {
   return (

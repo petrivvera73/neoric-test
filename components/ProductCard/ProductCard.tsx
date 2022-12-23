@@ -1,6 +1,6 @@
-import { TProduct } from '../utils/types';
-import ProductGallery from './ProductGallery';
-import ProductInfo from './ProductInfo';
+import { TProduct } from '../../utils/types';
+import ProductGallery from '../ProductGallery/ProductGallery';
+import ProductInfo from '../ProductInfo/ProductInfo';
 
 export default function ProductCard({ product }: { product: TProduct }) {
   console.log(product);

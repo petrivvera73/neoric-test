@@ -1,5 +1,5 @@
-import { formatPrice } from '../utils/formatPrice';
-import { TProduct } from '../utils/types';
+import { formatPrice } from '../../utils/formatPrice';
+import { TProduct } from '../../utils/types';
 
 export default function ProductInfo({
   title,

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useState, MouseEvent } from 'react';
-import { TImage } from '../utils/types';
-import { HorizCarousel } from './Carousel';
+import { TImage } from '../../utils/types';
+import { HorizCarousel } from '../Carousel/Carousel';
 
 export default function ProductGallery({ images }: { images: TImage[] }) {
   const imageList = images ? images.map(({ src }) => src) : [];

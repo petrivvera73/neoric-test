@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { fetchProducts } from '../services/fetchProducts';
 import { TProduct } from '../utils/types';
-import Link from 'next/link';
+import ProductGrid from '../components/ProductsGrid/ProductsGrid';
+import { Main } from './index.styled';
 
 export async function getServerSideProps() {
   const products = await fetchProducts();
@@ -20,23 +20,9 @@ export default function Home({ products }: { products: TProduct[] }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div>
-          {products.map(({ id, title, body_html, image }: TProduct) => (
-            <div key={id}>
-              <Link href={`/product/${id}`}>
-                <Image
-                  src={image.src.split('?')[0]}
-                  alt={title}
-                  width={650}
-                  height={650}
-                />
-                <h2>{title}</h2>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </main>
+      <Main>
+        <ProductGrid products={products} />
+      </Main>
     </>
   );
 }

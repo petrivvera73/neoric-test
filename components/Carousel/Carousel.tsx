@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { TImage } from '../utils/types';
+import { TImage } from '../../utils/types';
 import Image from 'next/image';
-import { CarouselBox } from './Carousel.styled';
-import { BREAKPOINTS } from '../styles/breakpoints';
-import useWindowSize from '../hooks/useWindowSize';
+import {
+  ArrowButton,
+  CarouselBox,
+  ImageWrapper,
+  Placeholder,
+  StyledCarousel,
+  StyledImage,
+} from './Carousel.styled';
+import { BREAKPOINTS } from '../../styles/breakpoints';
+import useWindowSize from '../../hooks/useWindowSize';
 
 export function HorizCarousel({
   images,
@@ -29,31 +36,35 @@ export function HorizCarousel({
 
   return (
     <CarouselBox>
+      {!images || (images.length === 0 && <Placeholder />)}
       {images && (
-        <Carousel
+        <StyledCarousel
           onChange={onChange}
           axis="horizontal"
           autoPlay={false}
-          showArrows={false}
           showStatus={false}
-          centerMode={true}
+          showThumbs={false}
+          centerMode={winWidth && winWidth < BREAKPOINTS.md ? true : false}
           centerSlidePercentage={95}
+          renderArrowPrev={RenderPrev}
+          renderArrowNext={RenderNext}
           {...dynamicProps}
         >
           {images.map((e, i) => {
             const height = (e.height * width) / e.width;
             return (
-              <Image
-                key={i}
-                src={e.src}
-                alt="product preview"
-                width={width}
-                height={height}
-                priority
-              />
+              <ImageWrapper key={i}>
+                <StyledImage
+                  src={e.src}
+                  alt="product preview"
+                  width={width}
+                  height={height}
+                  priority
+                />
+              </ImageWrapper>
             );
           })}
-        </Carousel>
+        </StyledCarousel>
       )}
     </CarouselBox>
   );
@@ -64,7 +75,16 @@ function RenderPrev(
   hasPrev: boolean,
   label: string
 ): React.ReactNode {
-  return <button type="button" onClick={clickHandler} disabled={!hasPrev} />;
+  return (
+    <ArrowButton
+      pos="left"
+      type="button"
+      onClick={clickHandler}
+      disabled={!hasPrev}
+    >
+      {'<'}
+    </ArrowButton>
+  );
 }
 
 function RenderNext(
@@ -72,5 +92,14 @@ function RenderNext(
   hasPrev: boolean,
   label: string
 ): React.ReactNode {
-  return <button type="button" onClick={clickHandler} disabled={!hasPrev} />;
+  return (
+    <ArrowButton
+      pos="right"
+      type="button"
+      onClick={clickHandler}
+      disabled={!hasPrev}
+    >
+      {'>'}
+    </ArrowButton>
+  );
 }

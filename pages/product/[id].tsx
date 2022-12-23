@@ -1,7 +1,7 @@
-import BenefitsList from '../../components/BenefitsList';
+import BenefitsList from '../../components/BenefitsList/BenefitsList';
 import { fetchProduct } from '../../services/fetchProduct';
 import { TProduct } from '../../utils/types';
-import ProductCard from '../../components/ProductCard';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 export async function getServerSideProps(context: { params: { id: number } }) {
   const id = context.params.id;
