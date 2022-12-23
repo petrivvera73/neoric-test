@@ -48,7 +48,7 @@ export const SmallText = styled.span`
   font-weight: 500;
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.span`
   display: inline-block;
   background-color: var(--green);
   height: 16px;
