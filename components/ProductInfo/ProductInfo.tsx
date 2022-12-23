@@ -22,9 +22,10 @@ export default function ProductInfo({
     compare_at_price: oldPrice,
     price,
     inventory_quantity: quantity,
+    taxable,
   } = variants
     ? variants[0]
-    : { compare_at_price: 0, price: 0, inventory_quantity: 0 };
+    : { compare_at_price: 0, price: 0, inventory_quantity: 0, taxable: false };
   return (
     <ProductInfoWrapper>
       <Title>{title}</Title>
@@ -34,7 +35,7 @@ export default function ProductInfo({
         <Price>
           <OldPrice>{formatPrice({ price: oldPrice })}</OldPrice>
           <ActualPrice> {formatPrice({ price })}</ActualPrice>
-          <SmallText>inkl. MwSt.</SmallText>
+          {taxable && <SmallText>inkl. MwSt.</SmallText>}
         </Price>
       ) : (
         <Price>
