@@ -1,13 +1,14 @@
 import BenefitBadge from '../BenefitBadge/BenefitBadge';
+import { BenefitsBlock, BenefitsListContainer } from './BenefitsList.styled';
 
 export default function BenefitsList() {
   return (
-    <ul>
-      <li>
+    <BenefitsBlock>
+      <BenefitsListContainer>
         <BenefitBadge />
         <BenefitBadge />
         <BenefitBadge />
-      </li>
-    </ul>
+      </BenefitsListContainer>
+    </BenefitsBlock>
   );
 }

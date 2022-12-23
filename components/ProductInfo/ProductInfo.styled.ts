@@ -10,6 +10,10 @@ export const ProductInfoWrapper = styled.div`
   border-radius: 5px;
   @media screen and (min-width: ${BREAKPOINTS.md}px) {
     padding: 18px 25px 25px;
+    width: 650px;
+  }
+  @media screen and (min-width: ${BREAKPOINTS.lg}px) {
+    padding: 18px 25px 25px;
     width: 475px;
   }
 `;

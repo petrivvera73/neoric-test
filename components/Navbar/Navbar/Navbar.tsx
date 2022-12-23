@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Logo from '../Logo/Logo';
-import shopperIcon from '../../../public/images/shopper.svg';
-import menuIcon from '../../../public/images/menu.svg';
+import ShopperIcon from '../../../public/images/shopper.svg';
+import MenuIcon from '../../../public/images/menu.svg';
 import {
   Menu,
   MenuBackdrop,
@@ -41,10 +41,10 @@ export default function Navbar() {
         </Menu>
         <NavbarBlock>
           <ShopperButton>
-            <Image src={shopperIcon} alt="icon" width={24} height={24} />
+            <ShopperIcon width={24} height={24} />
           </ShopperButton>
           <MenuToggle onClick={toggleMenu}>
-            <Image src={menuIcon} alt="icon" width={18} height={18} />
+            <MenuIcon width={18} height={18} />
           </MenuToggle>
         </NavbarBlock>
       </NavbarWrapper>

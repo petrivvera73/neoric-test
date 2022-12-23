@@ -1,20 +1,19 @@
-import Image from 'next/image';
 import qualityPic from '../../public/images/qualitat.png';
+import {
+  BadgeImage,
+  BadgeSubtitle,
+  BadgeTitle,
+  BadgeWrapper,
+} from './BenefitBadge.styled';
 
 export default function BenefitBadge() {
   return (
-    <div>
-      <Image
-        src={qualityPic}
-        alt="quality icon"
-        width={75}
-        height={96}
-        priority
-      />
+    <BadgeWrapper>
+      <BadgeImage src={qualityPic} alt="quality icon" priority />
       <div>
-        <p>100% Qualität</p>
-        <p>Dank weichem Silikon</p>
+        <BadgeTitle>100% Qualität</BadgeTitle>
+        <BadgeSubtitle>Dank weichem Silikon</BadgeSubtitle>
       </div>
-    </div>
+    </BadgeWrapper>
   );
 }

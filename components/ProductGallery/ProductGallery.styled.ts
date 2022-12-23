@@ -6,7 +6,6 @@ export const GalleryWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
 `;
 
 export const VerticalGallery = styled.div`

@@ -8,7 +8,7 @@ import {
   ScrollButton,
   ScrollDownButton,
   VerticalGallery,
-} from '../ProductCard/ProductGallery.styled';
+} from './ProductGallery.styled';
 import LeftArrowIcon from '../../public/images/chevron-left.svg';
 
 export default function ProductGallery({ images }: { images: TImage[] }) {
