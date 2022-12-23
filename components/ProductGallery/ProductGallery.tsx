@@ -45,19 +45,30 @@ export default function ProductGallery({ images }: { images: TImage[] }) {
           imageList.map((img, i) => {
             if (i >= skip && i < skip + 4)
               return (
-                <PreviewContainer key={i} data-key={i} onClick={handleChoose}>
+                <PreviewContainer
+                  key={i}
+                  data-key={i}
+                  onClick={handleChoose}
+                  selected={i === active}
+                >
                   <PreviewImage src={img} alt={`photo ${i}`} />
                 </PreviewContainer>
               );
           })}
         {skip > 0 && (
           <ScrollButton onClick={handleScrollUp}>
-            <LeftArrowIcon style={{ transform: 'rotate(90deg)' }} />
+            <LeftArrowIcon
+              style={{ transform: 'rotate(90deg)' }}
+              fill="currentColor"
+            />
           </ScrollButton>
         )}
         {skip < imageList?.length - 4 && (
           <ScrollDownButton onClick={handleScrollDown}>
-            <LeftArrowIcon style={{ transform: 'rotate(-90deg)' }} />
+            <LeftArrowIcon
+              style={{ transform: 'rotate(-90deg)' }}
+              fill="currentColor"
+            />
           </ScrollDownButton>
         )}
       </VerticalGallery>

@@ -37,15 +37,18 @@ export const ScrollButton = styled.button`
     height: 24px;
     border: none;
     border-radius: 12px;
-    color: var(--main);
+    color: var(--light);
     background-color: transparent;
     cursor: pointer;
-    &:focus,
     &:hover {
-      background-color: var(--lightest);
+      color: var(--accent);
+    }
     }
     &:disabled {
       color: var(--light);
+    }
+    & svg {
+      fill: currentColor;
     }
   }
 `;
@@ -57,12 +60,17 @@ export const ScrollDownButton = styled(ScrollButton)`
   }
 `;
 
-export const PreviewContainer = styled.div`
+interface PreviewContainerProps {
+  selected?: boolean;
+}
+
+export const PreviewContainer = styled.div<PreviewContainerProps>`
   position: relative;
   width: 100px;
   height: 100px;
   border-radius: 5px;
   overflow: hidden;
+  ${(p) => p.selected && 'border: 4px solid var(--light);'}
   cursor: pointer;
   & img {
     object-fit: cover;

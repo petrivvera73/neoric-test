@@ -121,9 +121,8 @@ export const ArrowButton = styled.button<ArrowButtonProps>`
     color: var(--main);
     background-color: transparent;
     cursor: pointer;
-    &:focus,
     &:hover {
-      background-color: var(--lightest);
+      color: var(--accent);
     }
     &:disabled {
       color: var(--light);
