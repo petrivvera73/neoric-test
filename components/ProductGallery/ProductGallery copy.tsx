@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState, MouseEvent, useCallback } from 'react';
 import { TImage } from '../../utils/types';
 import { HorizCarousel } from '../Carousel/Carousel';
@@ -12,16 +13,19 @@ import {
 import LeftArrowIcon from '../../public/images/chevron-left.svg';
 
 export default function ProductGallery({ images }: { images: TImage[] }) {
-  const imageList = images ? [...images] : [];
+  const imageList = images ? images.map(({ src }) => src) : [];
   const [active, setActive] = useState(0);
+  const [selected, setSelected] = useState(0);
   const [skip, setSkip] = useState(0);
 
   const handleChoose = (e: MouseEvent) => {
-    setActive(Number.parseInt(e.currentTarget.getAttribute('data-key') || '0'));
+    setSelected(
+      Number.parseInt(e.currentTarget.getAttribute('data-key') || '0')
+    );
   };
 
   const onCarouselChange = useCallback((index: number) => {
-    setActive(index);
+    // setActive(index);
   }, []);
 
   const handleScrollUp = () => {
@@ -33,7 +37,7 @@ export default function ProductGallery({ images }: { images: TImage[] }) {
 
   const handleScrollDown = () => {
     setSkip((s) => {
-      if (s < imageList.length - 4) return s + 1;
+      if (s < images.length - 4) return s + 1;
       return s;
     });
   };
@@ -41,8 +45,8 @@ export default function ProductGallery({ images }: { images: TImage[] }) {
   return (
     <GalleryWrapper>
       <VerticalGallery>
-        {imageList?.length > 0 &&
-          imageList.map((img, i) => {
+        {images?.length > 0 &&
+          images.map((img, i) => {
             if (i >= skip && i < skip + 4)
               return (
                 <PreviewContainer key={i} data-key={i} onClick={handleChoose}>
@@ -55,15 +59,15 @@ export default function ProductGallery({ images }: { images: TImage[] }) {
             <LeftArrowIcon style={{ transform: 'rotate(90deg)' }} />
           </ScrollButton>
         )}
-        {skip < imageList?.length - 4 && (
+        {skip < images?.length - 4 && (
           <ScrollDownButton onClick={handleScrollDown}>
             <LeftArrowIcon style={{ transform: 'rotate(-90deg)' }} />
           </ScrollDownButton>
         )}
       </VerticalGallery>
       <HorizCarousel
-        images={imageList}
-        selected={active}
+        images={images}
+        selected={selected}
         onChange={onCarouselChange}
       />
     </GalleryWrapper>

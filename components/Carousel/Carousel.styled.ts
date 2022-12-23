@@ -110,7 +110,7 @@ export const ArrowButton = styled.button<ArrowButtonProps>`
     position: absolute;
     bottom: -32px;
     left: 50%;
-    transform: translate(${(p) => (p.pos === 'left' ? '-18px' : '18px')});
+    transform: translateX(${(p) => (p.pos === 'left' ? '-30px' : '6px')});
     display: flex;
     justify-content: center;
     align-items: center;

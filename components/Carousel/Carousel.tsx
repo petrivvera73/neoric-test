@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { TImage } from '../../utils/types';
 import Image from 'next/image';
 import {
@@ -13,6 +12,8 @@ import {
 } from './Carousel.styled';
 import { BREAKPOINTS } from '../../styles/breakpoints';
 import useWindowSize from '../../hooks/useWindowSize';
+import LeftArrowIcon from '../../public/images/chevron-left.svg';
+import RightArrowIcon from '../../public/images/chevron-right.svg';
 
 export function HorizCarousel({
   images,
@@ -30,10 +31,6 @@ export function HorizCarousel({
   const winWidth = useWindowSize().width;
   const width = winWidth && winWidth < BREAKPOINTS.md ? winWidth : 480;
 
-  if (selected) {
-    setDynamicProps((params) => ({ ...params, selectedItem: selected }));
-  }
-
   return (
     <CarouselBox>
       {!images || (images.length === 0 && <Placeholder />)}
@@ -48,7 +45,8 @@ export function HorizCarousel({
           centerSlidePercentage={95}
           renderArrowPrev={RenderPrev}
           renderArrowNext={RenderNext}
-          {...dynamicProps}
+          selectedItem={selected}
+          // {...dynamicProps}
         >
           {images.map((e, i) => {
             const height = (e.height * width) / e.width;
@@ -82,7 +80,7 @@ function RenderPrev(
       onClick={clickHandler}
       disabled={!hasPrev}
     >
-      {'<'}
+      <LeftArrowIcon fill="currentColor" />
     </ArrowButton>
   );
 }
@@ -99,7 +97,7 @@ function RenderNext(
       onClick={clickHandler}
       disabled={!hasPrev}
     >
-      {'>'}
+      <RightArrowIcon fill="currentColor" />
     </ArrowButton>
   );
 }
