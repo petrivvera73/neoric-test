@@ -1,10 +1,19 @@
 import Link from 'next/link';
 import { TProduct } from '../../utils/types';
-import { Grid, GridItem, ItemCaption, ItemImage } from './ProductsGrid.styled';
+import {
+  Caption,
+  Grid,
+  GridItem,
+  ItemCaption,
+  ItemImage,
+} from './ProductsGrid.styled';
 
 export default function ProductGrid({ products }: { products: TProduct[] }) {
   return (
     <Grid>
+      <GridItem>
+        <Caption>Please, choose a product to view details</Caption>
+      </GridItem>
       {products?.length > 0 &&
         products.map((p, index) => (
           <Link key={p.id} href={`/product/${p.id}`}>
