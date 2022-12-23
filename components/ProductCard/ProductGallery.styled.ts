@@ -43,13 +43,12 @@ export const ScrollButton = styled.button`
     &:hover {
       color: var(--accent);
     }
-    }
-    &:disabled {
-      color: var(--light);
-    }
-    & svg {
-      fill: currentColor;
-    }
+  }
+  &:disabled {
+    color: var(--light);
+  }
+  & svg {
+    fill: currentColor;
   }
 `;
 
