@@ -1,5 +1,17 @@
 import { formatPrice } from '../../utils/formatPrice';
 import { TProduct } from '../../utils/types';
+import {
+  ActualPrice,
+  Button,
+  Circle,
+  GreenOption,
+  OldPrice,
+  Price,
+  ProductInfoWrapper,
+  SmallText,
+  Subtitle,
+  Title,
+} from './ProductInfo.styled';
 
 export default function ProductInfo({
   title,
@@ -14,16 +26,27 @@ export default function ProductInfo({
     ? variants[0]
     : { compare_at_price: 0, price: 0, inventory_quantity: 0 };
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>{bodyHtml}</p>
-      <h5>
-        <span>{formatPrice({ price: oldPrice })}</span>
-        {formatPrice({ price })}
-        <span>inkl. MwSt.</span>
-      </h5>
-      <p>● Auf Lager, in 2-3 Tagen bei dir</p>
-      <button type="button">In den Einkaufswagen</button>
-    </div>
+    <ProductInfoWrapper>
+      <Title>{title}</Title>
+      <Subtitle>{bodyHtml}</Subtitle>
+
+      {oldPrice && oldPrice !== price ? (
+        <Price>
+          <OldPrice>{formatPrice({ price: oldPrice })}</OldPrice>
+          <ActualPrice> {formatPrice({ price })}</ActualPrice>
+          <SmallText>inkl. MwSt.</SmallText>
+        </Price>
+      ) : (
+        <Price>
+          {price}
+          <SmallText>inkl. MwSt.</SmallText>
+        </Price>
+      )}
+
+      <GreenOption>
+        <Circle /> Auf Lager, in 2-3 Tagen bei dir
+      </GreenOption>
+      <Button type="button">In den Einkaufswagen</Button>
+    </ProductInfoWrapper>
   );
 }
