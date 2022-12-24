@@ -16,7 +16,10 @@ export default function ProductGrid({ products }: { products: TProduct[] }) {
       </GridItem>
       {products?.length > 0 &&
         products.map((p, index) => (
-          <Link key={p.id} href={`/product/${p.id}`}>
+          <Link
+            key={p.id}
+            href={`/product/${p.id.toString().replace(/^\D+/g, '')}`}
+          >
             <GridItem>
               <ItemImage
                 src={p.images[0].src || '/images/fallback.jpg'}

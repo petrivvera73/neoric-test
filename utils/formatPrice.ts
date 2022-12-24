@@ -1,13 +1,27 @@
 export function formatPrice({
-  price,
-  prefix = '',
-  postfix = '€',
+  amount,
+  currencyCode = 'USD',
 }: {
-  price: string | number;
-  prefix?: string;
-  postfix?: string;
+  amount: number;
+  currencyCode: string;
 }) {
-  const value = typeof price === 'string' ? Number.parseFloat(price) : price;
+  let prefix = '',
+    postfix = '';
+  switch (currencyCode) {
+    case 'UAH':
+      postfix = 'грн';
+      break;
+    case 'USD':
+      prefix = '$';
+      break;
+    case 'EUR':
+      prefix = '€';
+      break;
+    default:
+      break;
+  }
+
+  const value = typeof amount === 'string' ? Number.parseFloat(amount) : amount;
   const formattedString = `${prefix}${Math.round(value * 100) / 100}${postfix}`;
   return formattedString;
 }

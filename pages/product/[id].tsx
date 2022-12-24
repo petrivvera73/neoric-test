@@ -1,19 +1,28 @@
 import BenefitsList from '../../components/BenefitsList/BenefitsList';
-import { fetchProduct } from '../../services/fetchProduct';
 import { TProduct } from '../../utils/types';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { client } from '../../store/shopifyStore';
+import Loader from '../../components/Loader/Loader';
+import Cart from '../../components/Cart/Cart';
 
-export async function getServerSideProps(context: { params: { id: number } }) {
+export async function getServerSideProps(context: { params: { id: string } }) {
   const id = context.params.id;
-  const product = await fetchProduct(id);
-  return { props: { product: product || {} } };
+  const product = await client.product.fetch(`gid://shopify/Product/${id}`);
+  return { props: { product: JSON.parse(JSON.stringify(product)) } };
 }
 
 export default function Product({ product }: { product: TProduct }) {
   return (
     <main>
-      <ProductCard product={product} />
-      <BenefitsList />
+      {product ? (
+        <>
+          <ProductCard product={product} />
+          <BenefitsList />
+          <Cart />
+        </>
+      ) : (
+        <Loader />
+      )}
     </main>
   );
 }

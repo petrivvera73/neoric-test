@@ -12,34 +12,44 @@ import {
   Subtitle,
   Title,
 } from './ProductInfo.styled';
+import parse from 'html-react-parser';
 
 export default function ProductInfo({
   title,
-  body_html: bodyHtml,
+  description,
   variants,
 }: TProduct) {
-  const {
-    compare_at_price: oldPrice,
-    price,
-    inventory_quantity: quantity,
-    taxable,
-  } = variants
+  const { compareAtPrice, price } = variants
     ? variants[0]
-    : { compare_at_price: 0, price: 0, inventory_quantity: 0, taxable: false };
+    : {
+        compareAtPrice: { amount: 0, currencyCode: 'EUR' },
+        price: { amount: 0, currencyCode: 'EUR' },
+      };
+
   return (
     <ProductInfoWrapper>
       <Title>{title}</Title>
-      <Subtitle>{bodyHtml}</Subtitle>
+      <Subtitle>{description}</Subtitle>
 
-      {oldPrice && oldPrice !== price ? (
+      {compareAtPrice.amount ?? compareAtPrice.amount !== price.amount ? (
         <Price>
-          <OldPrice>{formatPrice({ price: oldPrice })}</OldPrice>
-          <ActualPrice> {formatPrice({ price })}</ActualPrice>
-          {taxable && <SmallText>inkl. MwSt.</SmallText>}
+          <OldPrice>
+            {formatPrice({
+              amount: compareAtPrice.amount,
+              currencyCode: compareAtPrice.currencyCode,
+            })}
+          </OldPrice>
+          <ActualPrice>
+            {formatPrice({
+              amount: price.amount,
+              currencyCode: price.currencyCode,
+            })}
+          </ActualPrice>
+          <SmallText>inkl. MwSt.</SmallText>
         </Price>
       ) : (
         <Price>
-          {price}
+          {price.amount}
           <SmallText>inkl. MwSt.</SmallText>
         </Price>
       )}

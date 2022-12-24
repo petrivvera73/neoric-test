@@ -1,17 +1,19 @@
 import Head from 'next/head';
-import { fetchProducts } from '../services/fetchProducts';
 import { TProduct } from '../utils/types';
 import ProductGrid from '../components/ProductsGrid/ProductsGrid';
 import { Main } from './index.styled';
+import { client } from '../store/shopifyStore';
 
-export async function getServerSideProps() {
-  const products = await fetchProducts();
-
-  return { props: { products: products || [] } };
-}
+export const getServerSideProps = async () => {
+  const products = await client.product.fetchAll();
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    },
+  };
+};
 
 export default function Home({ products }: { products: TProduct[] }) {
-  if (products) console.log(products);
   return (
     <>
       <Head>

@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Logo from '../Logo/Logo';
 import ShopperIcon from '../../../public/images/shopper.svg';
 import MenuIcon from '../../../public/images/menu.svg';
@@ -13,8 +12,11 @@ import {
   ShopperButton,
 } from './Navbar.styled';
 import Link from 'next/link';
+import { ShopContext } from '../../../store/shopContext';
 
 export default function Navbar() {
+  const { openCart } = useContext(ShopContext);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -40,7 +42,7 @@ export default function Navbar() {
           <MenuItem>Kontakt</MenuItem>
         </Menu>
         <NavbarBlock>
-          <ShopperButton>
+          <ShopperButton onClick={() => openCart && openCart()}>
             <ShopperIcon width={24} height={24} />
           </ShopperButton>
           <MenuToggle onClick={toggleMenu}>

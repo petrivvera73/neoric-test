@@ -1,63 +1,57 @@
 export type TImage = {
   id: number;
-  product_id: number;
-  position: number;
-  created_at: string;
-  updated_at: string;
-  alt: string | null;
+  altText: string | null;
   width: number;
   height: number;
   src: string;
-  variant_ids: [];
-  admin_graphql_api_id: string;
+  type: {};
+  hasNextPage: {};
+  hasPreviousPage: {};
+  variableValues: {};
+};
+
+export type TPrice = {
+  amount: number;
+  currencyCode: string;
 };
 
 export type TVariant = {
   id: number;
-  product_id: number;
   title: string;
-  price: string;
+  price: TPrice;
+  priceV2: TPrice; //
+  compareAtPrice: TPrice; //
+  compareAtPriceV2: TPrice; //
   sku: string;
   position: number;
-  inventory_policy: string;
-  compare_at_price: string;
-  fulfillment_service: string;
-  inventory_management: string;
-  option1: string | null;
-  option2: string | null;
-  option3: string | null;
+  selectedOptions: [];
   created_at: string;
   updated_at: string;
-  taxable: boolean;
-  barcode: string;
-  grams: number;
-  image_id: number | null;
+  image: TImage; //
   weight: number;
-  weight_unit: string;
-  inventory_item_id: number;
-  inventory_quantity: number;
-  old_inventory_quantity: number;
-  requires_shipping: boolean;
-  admin_graphql_api_id: string;
+  unitPrice: string;
+  unitPriceMeasurement: {};
+  available: boolean;
 };
 
 export type TProduct = {
+  [x: string]: any;
   id: number;
   title: string;
-  body_html: string;
+  descriptionhtml: string;
+  description: string;
   vendor: string;
-  product_type: string;
-  created_at: string;
+  productType: string;
+  createdAt: string;
   handle: string;
-  updated_at: string;
-  published_at: string;
-  template_suffix: string;
-  status: string;
+  updatedAt: string;
+  publishedAt: string;
+  availableForSale: boolean;
   published_scope: string;
   tags: string;
   admin_graphql_api_id: string;
   variants: TVariant[];
-  options: [];
+  options: { id: string; name: string; values: []; type: {} }[];
   images: TImage[];
   image: TImage;
 };
